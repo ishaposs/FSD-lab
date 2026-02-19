@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <p class="pre-title">Assignment No. 3 &middot; JavaScript</p>
+      <h1>Registration Form</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="form-card">
+      <p class="form-intro">Please fill in all the fields below. All fields are required.</p>
+
+      <form id="regForm" onsubmit="return validateForm()" novalidate>
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter your full name">
+          <span class="error-msg" id="nameError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="text" id="email" placeholder="Enter your email">
+          <span class="error-msg" id="emailError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Minimum 6 characters">
+          <span class="error-msg" id="passwordError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+          <input type="text" id="mobile" placeholder="10-digit mobile number" maxlength="10">
+          <span class="error-msg" id="mobileError"></span>
+        </div>
+
+        <button type="submit">Register</button>
+
+        <p class="success-msg" id="successMsg"></p>
+
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Student Registration</p>
+  </footer>
+
+</body>
+</html>

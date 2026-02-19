@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator</title>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #7B6CD0;
+    }
+
+    .calculator {
+      background-color: #1C1B2E;
+      border-radius: 28px;
+      width: 268px;
+      padding: 0 20px 20px 20px;
+      box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.45),
+        0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .display {
+      height: 110px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 0 4px 12px 4px;
+      color: #ffffff;
+      font-size: 40px;
+      font-weight: 300;
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      letter-spacing: 1px;
+      word-break: break-all;
+      overflow: hidden;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+    }
+
+    button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 400;
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      transition: filter 0.08s ease, transform 0.08s ease;
+      user-select: none;
+    }
+
+    button:hover  { filter: brightness(1.18); }
+    button:active { transform: scale(0.91); filter: brightness(1.25); }
+
+    .btn-num {
+      background-color: #272535;
+      color: #C8C4E8;
+    }
+
+    .btn-ce {
+      background-color: #272535;
+      color: #8B7FC4;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* × is brighter purple (top-right in screenshot) */
+    .btn-multiply {
+      background-color: #6B46B8;
+      color: #ffffff;
+    }
+
+    /* −, +, ÷ are darker purple */
+    .btn-op {
+      background-color: #4E3488;
+      color: #ffffff;
+    }
+
+    /* = is medium purple */
+    .btn-eq {
+      background-color: #5B3FA0;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <div class="display" id="display">2</div>
+  <div class="buttons">
+    <button class="btn-num"      onclick="pressNum('7')">7</button>
+    <button class="btn-num"      onclick="pressNum('8')">8</button>
+    <button class="btn-num"      onclick="pressNum('9')">9</button>
+    <button class="btn-multiply" onclick="pressOp('×')">×</button>
+
+    <button class="btn-num" onclick="pressNum('4')">4</button>
+    <button class="btn-num" onclick="pressNum('5')">5</button>
+    <button class="btn-num" onclick="pressNum('6')">6</button>
+    <button class="btn-op"  onclick="pressOp('−')">−</button>
+
+    <button class="btn-num" onclick="pressNum('1')">1</button>
+    <button class="btn-num" onclick="pressNum('2')">2</button>
+    <button class="btn-num" onclick="pressNum('3')">3</button>
+    <button class="btn-op"  onclick="pressOp('+')">+</button>
+
+    <button class="btn-ce"  onclick="pressCE()">CE</button>
+    <button class="btn-num" onclick="pressNum('0')">0</button>
+    <button class="btn-eq"  onclick="pressEqual()">=</button>
+    <button class="btn-op"  onclick="pressOp('÷')">÷</button>
+  </div>
+</div>
+
+<script>
+  let current = '';
+  let operator = '';
+  let operand1 = null;
+  let justCalc = false;
+
+  const disp = document.getElementById('display');
+
+  function show(val) {
+    disp.textContent = (val === '' || val === undefined) ? '0' : String(val);
+  }
+
+  function pressNum(n) {
+    if (justCalc) { current = n; justCalc = false; }
+    else { current = current === '' ? n : current + n; }
+    show(current);
+  }
+
+  function pressOp(op) {
+    if (justCalc) justCalc = false;
+    else if (current !== '' && operand1 !== null && operator !== '') {
+      const r = compute(operand1, parseFloat(current), operator);
+      operand1 = r;
+      current = '';
+      show(fmt(r));
+      operator = op;
+      return;
+    }
+    if (current !== '') { operand1 = parseFloat(current); current = ''; }
+    operator = op;
+  }
+
+  function pressEqual() {
+    if (operand1 === null || current === '' || operator === '') return;
+    const r = compute(operand1, parseFloat(current), operator);
+    const v = fmt(r);
+    show(v);
+    current = String(v);
+    operand1 = null;
+    operator = '';
+    justCalc = true;
+  }
+
+  function compute(a, b, op) {
+    if (op === '+') return a + b;
+    if (op === '−') return a - b;
+    if (op === '×') return a * b;
+    if (op === '÷') return b !== 0 ? a / b : 'Error';
+  }
+
+  function fmt(n) {
+    if (typeof n !== 'number') return n;
+    return Math.round(n * 1e10) / 1e10;
+  }
+
+  function pressCE() {
+    current = ''; operator = ''; operand1 = null; justCalc = false;
+    show('0');
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key >= '0' && e.key <= '9') pressNum(e.key);
+    else if (e.key === '+') pressOp('+');
+    else if (e.key === '-') pressOp('−');
+    else if (e.key === '*') pressOp('×');
+    else if (e.key === '/') { e.preventDefault(); pressOp('÷'); }
+    else if (e.key === 'Enter' || e.key === '=') pressEqual();
+    else if (e.key === 'Escape' || e.key === 'Delete') pressCE();
+    else if (e.key === 'Backspace') {
+      current = current.slice(0, -1);
+      show(current || '0');
+    }
+  });
+</script>
+</body>
+</html>

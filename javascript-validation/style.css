@@ -1,0 +1,187 @@
+/* ============================================
+   Student Registration Form – form.css
+   Matching palette & fonts from Student Portfolio
+   ============================================ */
+
+:root {
+  --bg: #fafaf8;
+  --ink: #1a1a1a;
+  --accent: #2a5caa;
+  --muted: #6b7280;
+  --border: #e5e5e0;
+  --border-focus: #2a5caa;
+  --card: #ffffff;
+  --error: #c0392b;
+  --success: #1a7a4a;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--sans);
+  background-color: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+header {
+  background-color: var(--ink);
+  color: white;
+  padding: 64px 40px 56px;
+  border-bottom: 3px solid var(--accent);
+}
+
+.header-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.pre-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 14px;
+}
+
+header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* ── MAIN ── */
+main {
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 56px 40px 80px;
+  flex: 1;
+}
+
+/* ── FORM CARD ── */
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 40px 44px;
+}
+
+.form-intro {
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+/* ── FORM GROUPS ── */
+.form-group {
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+input[type="text"],
+input[type="password"] {
+  font-family: var(--sans);
+  font-size: 0.97rem;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  border-radius: 2px;
+  width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: var(--border-focus);
+  background: #fff;
+}
+
+input.invalid {
+  border-color: var(--error);
+}
+
+/* ── ERROR & SUCCESS MESSAGES ── */
+.error-msg {
+  font-size: 0.8rem;
+  color: var(--error);
+  font-weight: 500;
+  min-height: 16px;
+}
+
+.success-msg {
+  font-size: 0.92rem;
+  color: var(--success);
+  font-weight: 600;
+  margin-top: 16px;
+  display: none;
+}
+
+.success-msg.visible {
+  display: block;
+}
+
+/* ── SUBMIT BUTTON ── */
+button[type="submit"] {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+  background-color: var(--accent);
+  border: none;
+  padding: 14px 36px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.2s, opacity 0.2s;
+  margin-top: 8px;
+}
+
+button[type="submit"]:hover {
+  opacity: 0.85;
+}
+
+/* ── FOOTER ── */
+footer {
+  background-color: var(--ink);
+  color: #6b7280;
+  text-align: center;
+  padding: 20px 40px;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  border-top: 3px solid var(--accent);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  header { padding: 44px 24px 36px; }
+  main { padding: 32px 20px 60px; }
+  .form-card { padding: 28px 24px; }
+}
