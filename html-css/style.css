@@ -1,0 +1,234 @@
+/* ============================================
+   Student Portfolio – style.css
+   ============================================ */
+
+:root {
+  --bg: #f9f9f7;
+  --ink: #1a1a1a;
+  --accent: #2a5caa;
+  --muted: #6b7280;
+  --border: #e5e5e0;
+  --card: #ffffff;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background-color: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* ── HEADER ── */
+header {
+  background-color: var(--ink);
+  color: white;
+  padding: 56px 40px;
+  border-bottom: 3px solid var(--accent);
+}
+
+header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  letter-spacing: 0.05em;
+}
+
+/* ── NAV ── */
+nav {
+  background-color: var(--ink);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  text-decoration: none;
+  padding: 14px 16px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+nav a:hover {
+  color: white;
+  border-bottom-color: var(--accent);
+}
+
+/* ── MAIN ── */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+section:last-child { border-bottom: none; }
+
+section h2 {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+section p {
+  font-size: 0.97rem;
+  color: #444;
+  max-width: 580px;
+  line-height: 1.8;
+}
+
+/* ── EDUCATION ── */
+.edu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.edu-item:last-child { border-bottom: none; }
+
+.edu-main h3 {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.edu-place {
+  font-size: 0.87rem;
+  color: var(--muted);
+  max-width: none;
+}
+
+.edu-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.badge {
+  background: var(--accent);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  letter-spacing: 0.04em;
+}
+
+/* ── SKILLS ── */
+.skills-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills-list li {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.skills-list li:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── PROJECT CARDS ── */
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 22px 26px;
+  margin-bottom: 12px;
+}
+
+.project-card:last-child { margin-bottom: 0; }
+
+.project-card h3 {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  max-width: none;
+  line-height: 1.7;
+}
+
+/* ── CONTACT ── */
+.email-link {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+
+.email-link:hover { opacity: 0.7; }
+
+/* ── FOOTER ── */
+footer {
+  background-color: var(--ink);
+  color: #6b7280;
+  text-align: center;
+  padding: 18px 40px;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  border-top: 3px solid var(--accent);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  header { padding: 40px 24px; }
+  nav { padding: 0 16px; }
+  nav a { padding: 12px 10px; }
+  main { padding: 0 24px 60px; }
+  .edu-item { flex-direction: column; gap: 8px; }
+  .edu-meta { align-items: flex-start; }
+}
